@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="fast_search_activity_transparent">#80000000</color>
+    <color name="window_background_color">#ffe2e2e2</color>
+    <color name="textColor">#5D62A5</color>
+    <color name="ripplecolor_lvitem">#9ccc</color>
+    <color name="list_txt_bg_normal">#FFFFFF</color>
+    <color name="list_txt_bg_pressed">#80000000</color>
+</resources>

@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="NoTitleNoAnimationNoBackground" parent="@style/NoTitle">
+        <item name="android:windowBackground">@color/fast_search_activity_transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="NoTitle" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowBackground">@color/window_background_color</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!--<item name="android:windowAnimationStyle">@style/EbpayActivityAnim</item>-->
+    </style>
+
+    <!--<style name="EbpayActivityAnim">-->
+        <!--<item name="android:activityOpenEnterAnimation">@anim/wallet_base_slide_from_right</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/wallet_base_slide_to_left</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/wallet_base_slide_from_left</item>-->
+        <!--<item name="android:activityCloseExitAnimation">@anim/wallet_base_slide_to_right</item>-->
+    <!--</style>-->
+
+</resources>
