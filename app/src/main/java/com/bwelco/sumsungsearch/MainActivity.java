@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +26,10 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+import static android.preference.PreferenceActivity.EXTRA_NO_HEADERS;
+import static android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT;
+import static android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_TITLE;
+
 public class MainActivity extends Activity implements TextWatcher, View.OnClickListener {
 
     ImageView close_image;
@@ -35,7 +38,7 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
     ListView listView;
     RelativeLayout layout;
     ArrayList<String> lists;
-    String TAG = MainActivity.class.getSimpleName();
+    //String TAG = MainActivity.class.getSimpleName();
     MyListAdapter adapter;
 
     @Override
@@ -95,13 +98,12 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            Log.i(TAG, "返回：" + s);
+
 
             try {
                 JSONArray array = new JSONArray(s);
                 String name = array.getString(0);
                 JSONArray listsJson = (JSONArray) array.get(1);
-                Log.i(TAG, "NAME:" + name);
 
                 lists.clear();
                 for (int i = 0; i < listsJson.length(); i++) {
@@ -109,7 +111,7 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
                 }
 
                 for (String s2 : lists) {
-                    Log.i(TAG, s2);
+                   // Log.i(TAG, s2);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -172,10 +174,22 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (editText.getText().toString().equals("")) {
+        if (editText.getText().toString().equals("设备")) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClassName("com.android.settings", "com.android.settings.SubSettings");
+            intent.putExtra(EXTRA_SHOW_FRAGMENT, "com.android.settings.AccessibilitySettings");
+            intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE, "ttt");
+            intent.putExtra(EXTRA_NO_HEADERS, true);
+            startActivity(intent);
+            return;
+        }
+
+        if (editText.getText().length() == 0) {
             search_image.setVisibility(View.VISIBLE);
             close_image.setVisibility(View.GONE);
             search_image.setImageResource(R.drawable.search);
+            lists.clear();
+            MainActivity.this.adapter.notifyDataSetChanged();
 
         } else {
             search_image.setVisibility(View.GONE);
