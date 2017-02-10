@@ -26,10 +26,6 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-import static android.preference.PreferenceActivity.EXTRA_NO_HEADERS;
-import static android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT;
-import static android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_TITLE;
-
 public class MainActivity extends Activity implements TextWatcher, View.OnClickListener {
 
     ImageView close_image;
@@ -99,7 +95,6 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
                 e.printStackTrace();
             }
 
-
             try {
                 JSONArray array = new JSONArray(s);
                 String name = array.getString(0);
@@ -110,9 +105,6 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
                     lists.add(listsJson.getString(i).toString());
                 }
 
-                for (String s2 : lists) {
-                   // Log.i(TAG, s2);
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -174,27 +166,17 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (editText.getText().toString().equals("设备")) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName("com.android.settings", "com.android.settings.SubSettings");
-            intent.putExtra(EXTRA_SHOW_FRAGMENT, "com.android.settings.AccessibilitySettings");
-            intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE, "ttt");
-            intent.putExtra(EXTRA_NO_HEADERS, true);
-            startActivity(intent);
-            return;
-        }
-
         if (editText.getText().length() == 0) {
             search_image.setVisibility(View.VISIBLE);
             close_image.setVisibility(View.GONE);
-            search_image.setImageResource(R.drawable.search);
+            search_image.setImageResource(R.mipmap.search);
             lists.clear();
             MainActivity.this.adapter.notifyDataSetChanged();
 
         } else {
             search_image.setVisibility(View.GONE);
             close_image.setVisibility(View.VISIBLE);
-            close_image.setImageResource(R.drawable.close);
+            close_image.setImageResource(R.mipmap.close);
             close_image.setOnClickListener(this);
             getLists();
         }
@@ -207,7 +189,6 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
         params.add("action", "opensearch");
 
         MyHttpUtil.get("http://suggestion.baidu.com/su", params, handler);
-
     }
 
     @Override
@@ -217,7 +198,6 @@ public class MainActivity extends Activity implements TextWatcher, View.OnClickL
                 editText.setText("");
                 break;
             }
-
             default:break;
         }
     }

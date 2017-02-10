@@ -26,22 +26,24 @@
             android:paddingLeft="10dp" />
 
         <ImageView
-            android:paddingRight="10dp"
+            android:paddingRight="15dp"
             android:id="@+id/close_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerInside"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/search" />
+            android:src="@mipmap/search" />
 
         <ImageView
             android:paddingRight="10dp"
             android:id="@+id/search_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:scaleType="centerInside"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/search" />
+            android:src="@mipmap/search" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -14,18 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by bwelco on 2016/6/5.
  */
 public class MyListAdapter extends ArrayAdapter<String> {
+    static HashMap<Integer, Bitmap> bitmaps;
     int res_id;
     MainActivity ac;
     public MyListAdapter(Context context, int resource, List<String> objects, MainActivity ac) {
         super(context, resource, objects);
         this.res_id = resource;
         this.ac = ac;
+        bitmaps = new HashMap<>();
     }
 
     @Override
@@ -40,8 +43,6 @@ public class MyListAdapter extends ArrayAdapter<String> {
         }else {
             holder = (MyHolder) convertView.getTag();
         }
-
-
 
         try {
             int bstart = text.indexOf(ac.getTextString());
@@ -61,9 +62,7 @@ public class MyListAdapter extends ArrayAdapter<String> {
 
         }
 
-        holder.imageview.setImageBitmap(readBitMap(getContext(), R.drawable.search));
-
-
+        holder.imageview.setImageBitmap(readBitMap(getContext(), R.mipmap.search));
         return convertView;
     }
 
@@ -73,11 +72,17 @@ public class MyListAdapter extends ArrayAdapter<String> {
     }
 
     public static Bitmap readBitMap(Context context, int resId){
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inPreferredConfig = Bitmap.Config.RGB_565;
-        opt.inPurgeable = true;
-        opt.inInputShareable = true;
-        InputStream is = context.getResources().openRawResource(resId);
-        return BitmapFactory.decodeStream(is,null,opt);
+        if (bitmaps.containsKey(resId)) {
+            return bitmaps.get(resId);
+        } else {
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            InputStream is = context.getResources().openRawResource(resId);
+            Bitmap ret = BitmapFactory.decodeStream(is, null, opt);
+            bitmaps.put(resId, ret);
+            return ret;
+        }
     }
 }
